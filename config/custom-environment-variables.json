@@ -1,0 +1,8 @@
+{
+  "mongoURI": "MONGOLAB_URI",
+  "steamApiKey": "STEAM_KEY",
+  "discord": {
+    "email": "DISCORD_EMAIL",
+    "password": "DISCORD_EMAIL"
+  }
+}

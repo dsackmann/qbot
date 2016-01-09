@@ -1,0 +1,9 @@
+{
+  "mongoURI": "lol",
+  "steamApiKey": "lol",
+  "discord": {
+    "email": "lol",
+    "password": "lol"
+  },
+  "appUrl": "http://localhost:3000/"
+}
