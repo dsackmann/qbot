@@ -13,7 +13,7 @@ passport.deserializeUser(function (obj, done) {
 });
 
 passport.use(new SteamStrategy({
-    returnUrl: config.get("appUrl") + "auth/steam/return",
+    returnURL: config.get("appUrl") + "auth/steam/return",
     realm: config.get("appUrl"),
     apiKey: config.get("steamApiKey")
 }, function (identifier, profile, done) {
