@@ -6,10 +6,14 @@ var bodyParser = require("body-parser");
 var session = require("express-session");
 var MongoStore = require("connect-mongo")(session);
 var express = require("express");
-var bot = require("../bot");
-var passport = require("./steamPassport");
+var mongoose = require("mongoose");
 
 var app = express();
+
+app.locals.bot = require("../bot");
+app.locals.models = {
+    User: mongoose.model(require("../schemas/User.js"))
+};
 
 app.use(cookieParser());
 app.use(bodyParser());
@@ -18,33 +22,27 @@ app.use(session({
     store: new MongoStore({url: config.get("mongoURI")})
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+require("routes/public")(app);
 
-app.get("/", function (req, res) {
-    res.send("uptime: " + bot.client.uptime);
-});
-
-app.get("/auth/success", checkAuth, function (req, res) {
-    res.send(req.user);
-});
-
-app.get("/auth/steam*", passport.authenticate("steam", {failureRedirect: "/"}));
-
-app.get("/auth/steam", function (req, res) {
-    res.redirect("/auth/success");
-});
-
-app.get("/auth/steam/return", function (req, res) {
-    res.redirect("/auth/success");
-});
-
-function checkAuth(req, res, next) {
+app.use(function checkAuth(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
 
     res.redirect("/");
-}
+});
 
-app.listen(process.env.PORT);
+require("routes/authenticated")(app);
+
+mongoose.connect(config.get("mongoURI"))
+    .on("error", function (err) {
+        console.error("mongo connection error: " + err);
+    })
+    .once("open", function() {
+        app.listen(process.env.PORT);
+        console.log("listening on port " + process.env.PORT);
+
+        app.locals.bot.connect(function () {
+            console.log("bot connected");
+        });
+    });
