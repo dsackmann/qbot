@@ -34,7 +34,9 @@ app.use(function checkAuth(req, res, next) {
 
 require("routes/authenticated")(app);
 
-mongoose.connect(config.get("mongoURI"))
+mongoose.connect(config.get("mongoURI"));
+
+mongoose.connection
     .on("error", function (err) {
         console.error("mongo connection error: " + err);
     })
