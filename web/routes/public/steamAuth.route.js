@@ -18,7 +18,7 @@ module.exports = function (app) {
     passport.deserializeUser(function (id, done) {
         User.findOne({steamId: id}).then(function (user) {
             done(null, user);
-        }).catch(done);
+        }, done).end();
     });
 
     passport.use(new SteamStrategy({
@@ -42,7 +42,7 @@ module.exports = function (app) {
             return user.save();
         }).then(function (user) {
             done(null, user);
-        });
+        }).end();
     }));
 
     app.use(passport.initialize());
