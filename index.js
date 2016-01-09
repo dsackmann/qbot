@@ -1,5 +1,11 @@
 "use strict";
 
+console.log("script executed");
+
+if (!process.env.DISCORD_EMAIL && !process.argv[2]) {
+    throw new Error("No credentials");
+}
+
 var Promise = require("bluebird");
 var unirest = require("unirest");
 var _ = require("lodash");
@@ -21,7 +27,9 @@ bot
         });
     });
 
-bot.connect(function () {});
+bot.connect(function () {
+    console.log("Connected!");
+});
 
 function getQuoteAsync (keyword) {
     function formatQuote (quoteBody) {
