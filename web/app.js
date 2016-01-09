@@ -25,18 +25,26 @@ app.get("/", function (req, res) {
     res.send("uptime: " + bot.client.uptime);
 });
 
+app.get("/auth/success", checkAuth, function (req, res) {
+    res.send(req.user);
+});
+
 app.get("/auth/steam*", passport.authenticate("steam", {failureRedirect: "/"}));
 
 app.get("/auth/steam", function (req, res) {
-    res.redirect("/auth/steam/success");
+    res.redirect("/auth/success");
 });
 
 app.get("/auth/steam/return", function (req, res) {
-    res.redirect("/auth/steam/success");
+    res.redirect("/auth/success");
 });
 
-app.get("/auth/steam/success", function (req, res) {
-    res.send(req.user);
-});
+function checkAuth(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+
+    res.redirect("/");
+}
 
 app.listen(process.env.PORT);
