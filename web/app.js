@@ -22,7 +22,7 @@ app.use(session({
     store: new MongoStore({url: config.get("mongoURI")})
 }));
 
-require("routes/public")(app);
+require("./routes/public")(app);
 
 app.use(function checkAuth(req, res, next) {
     if (req.isAuthenticated()) {
@@ -32,7 +32,7 @@ app.use(function checkAuth(req, res, next) {
     res.redirect("/");
 });
 
-require("routes/authenticated")(app);
+require("./routes/authenticated")(app);
 
 mongoose.connect(config.get("mongoURI"));
 
