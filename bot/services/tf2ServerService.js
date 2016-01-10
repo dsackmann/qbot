@@ -1,6 +1,5 @@
 "use strict";
 var _ = require("lodash");
-var url = require("url");
 var Promise = require("bluebird");
 var query = require("game-server-query");
 
@@ -9,15 +8,18 @@ function Tf2ServerService() {
 
 Tf2ServerService.prototype = {
     getServerInfo: function (address) {
+        var colonIndex = address.indexOf(":");
+        var host = address.slice(0, colonIndex);
+        var port = address.slice(colonIndex + 1, address.length);
 
+        console.log("host: " + host);
+        console.log("port: " + port);
         return new Promise(function (resolve, reject) {
-            var address = url.parse(address);
-            console.log("tf2 server service getting info for server: " + JSON.stringify(address));
 
             query({
                 type: "tf2",
-                host: address.host,
-                port: address.port
+                host: host,
+                port: port
             }, function (response) {
                 if (response.error) {
                     reject(response);
