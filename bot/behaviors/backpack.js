@@ -34,7 +34,10 @@ module.exports = function (bot) {
             var that = this;
             var userName = args.commandArgs.user.substr(1);
 
-            var targetUser = args.message.mentions.get("name", userName);
+            var targetUser = _(args.message.mentions)
+                .find(function (mention) {
+                    return mention.name === userName;
+                }).resolve();
 
             if (!targetUser) {
                 this.reply("who the fuck is that?");
