@@ -33,7 +33,7 @@ module.exports = function (bot) {
             console.log("backpack requested");
             var that = this;
 
-            var targetUser = _.findFirst(args.message.mentions, function (mention) {
+            var targetUser = _.find(args.message.mentions, function (mention) {
                 return mention.name !== bot.client.user.name;
             });
 
