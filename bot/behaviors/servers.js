@@ -29,7 +29,7 @@ module.exports = function (bot) {
                     .groupBy("gameserverip");
 
                 var playerCounts = servers.mapValues("length").value();
-                that.reply(playerCounts);
+                that.reply(JSON.stringify(playerCounts));
             }).onReject(function (err) {
                 console.error("Error fetching servers: " + err);
                 that.reply("Couldn't get servers, something went wrong");
