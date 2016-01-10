@@ -37,7 +37,7 @@ module.exports = function (bot) {
             var targetUser = _(args.message.mentions)
                 .find(function (mention) {
                     return mention.name === userName;
-                }).resolve();
+                }).value();
 
             if (!targetUser) {
                 this.reply("who the fuck is that?");
