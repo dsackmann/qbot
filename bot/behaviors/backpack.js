@@ -30,10 +30,10 @@ module.exports = function (bot) {
         .on(bot.triggers['mention-command'], 'backpack', ['user'])
         .do(function(bot, conf, args) {
             var that = this;
-            var userName = _.rest(args.commandArgs.user);
+            var userName = args.commandArgs.user.substr(1);
 
             console.log("backpack requested for " + userName);
-            var targetUser = args.message.mentions.get(userName);
+            var targetUser = args.message.mentions.get("name", userName);
 
             if (!targetUser) {
                 this.reply("who the fuck is that?");
