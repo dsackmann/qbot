@@ -2,10 +2,9 @@
 
 var mongoose = require("mongoose");
 var User = mongoose.model(require("../../schemas/User"));
-var privateMsg = require("../triggers/privateMessage");
 
 module.exports = function (bot) {
-    bot.on(privateMsg, "verify", ["token"])
+    bot.on(bot.triggers['mention-command'], "verify", ["token"])
         .do(function (bot, conf, args) {
             var discordId = args.message.author.id;
             var token = args.commandArgs.token;
