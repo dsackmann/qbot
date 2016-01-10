@@ -28,14 +28,12 @@ function getItemsAsync(steamId) {
 
 module.exports = function (bot) {
     bot
-        .on(bot.triggers['mention-command'], 'backpack')
+        .on(bot.triggers['mention-command'], 'backpack', ["@user"])
         .do(function(bot, conf, args) {
             console.log("backpack requested");
             var that = this;
 
-            var targetUser = _.find(args.message.mentions, function (mention) {
-                return mention.name !== bot.client.user.name;
-            });
+            var targetUser = args.commandArgs.user;
 
             if (!targetUser) {
                targetUser = args.message.author;
