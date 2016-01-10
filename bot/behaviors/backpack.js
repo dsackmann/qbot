@@ -18,7 +18,7 @@ function getItemsAsync(steamId) {
             .header("Accept", "application/json")
             .end(function (response) {
                 if (response.code < 400) {
-                    resolve(response.body);
+                    resolve(response.body.result);
                 } else {
                     reject(response.body);
                 }
@@ -49,6 +49,11 @@ module.exports = function (bot) {
                 }
 
                 return getItemsAsync(user.steamId).then(function (itemManifest) {
+                    if (itemManifest.status === 15) {
+                        that.reply("User's backpack is private!");
+                        return;
+                    }
+
                     that.reply(JSON.stringify(itemManifest, null, 2));
                 });
             }).onReject(function (err) {
