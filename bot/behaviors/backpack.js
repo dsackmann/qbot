@@ -9,9 +9,9 @@ var _ = require("lodash");
 _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
 
 var backpackInfoTmpl = _.template("{{username}} has {{numTotal}} TF2 items, including:\n\t\t" +
-    "{{numUnusual}} unusual,\n\t\t" +
-    "{{numStrange}} strange,\n\t\n" +
-    "and {{numCollectors}} collector's items.");
+    "{{numUnusual || 0}} unusual,\n\t\t" +
+    "{{numStrange || 0}} strange,\n\t\t" +
+    "and {{numCollectors || 0}} collector's items.");
 
 function getItemsAsync(steamId) {
     var url = "http://api.steampowered.com/IEconItems_440/GetPlayerItems/v0001/?" +
