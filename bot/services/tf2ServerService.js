@@ -10,7 +10,7 @@ Tf2ServerService.prototype = {
     getServerInfo: function (address) {
         var colonIndex = address.indexOf(":");
         var host = address.slice(0, colonIndex);
-        var port = address.slice(colonIndex + 1, address.length);
+        var port = parseInt(address.slice(colonIndex + 1, address.length), 10);
 
         console.log("host: " + host);
         console.log("port: " + port);
