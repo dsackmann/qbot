@@ -1,8 +1,8 @@
 "use strict";
 
+var SteamApi = require("steam-api");
+var items = new SteamApi.Items();
 var config = require("config");
-var Promise = require("bluebird");
-var unirest = require("unirest");
 var mongoose = require("mongoose");
 var User = mongoose.model(require("../../schemas/User"));
 var _ = require("lodash");
@@ -13,24 +13,6 @@ var backpackInfoTmpl = _.template("{{username}} has {{numTotal}} TF2 items, incl
     "{{numStrange || 0}} strange,\n\t\t" +
     "and {{numCollectors || 0}} collector's items.");
 
-function getItemsAsync(steamId) {
-    var url = "http://api.steampowered.com/IEconItems_440/GetPlayerItems/v0001/?" +
-        "key=" + config.get("steamApiKey") + "&" +
-        "SteamID=" + steamId;
-
-    console.log("requesting: " + url);
-    return new Promise(function (resolve, reject) {
-        unirest.get(url)
-            .header("Accept", "application/json")
-            .end(function (response) {
-                if (response.code < 400) {
-                    resolve(response.body.result);
-                } else {
-                    reject(response.body);
-                }
-            });
-    });
-}
 
 function parseManifest(itemManifest) {
     var counts = _(itemManifest.items)
@@ -68,7 +50,8 @@ module.exports = function (bot) {
                     return;
                 }
 
-                return getItemsAsync(user.steamId).then(function (itemManifest) {
+                return items.GetPlayerItems(440, steamId).then(function (response) {
+                    var itemManifest = response.result;
                     if (itemManifest.status === 15) {
                         that.reply(targetUser.username + "'s backpack is private!");
                         return;

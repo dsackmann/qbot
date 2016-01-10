@@ -1,6 +1,6 @@
 {
   "mongoURI": "MONGOLAB_URI",
-  "steamApiKey": "STEAM_KEY",
+  "steamApiKey": "STEAM_API_KEY",
   "discord": {
     "email": "DISCORD_EMAIL",
     "password": "DISCORD_PASS"
