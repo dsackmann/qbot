@@ -2,7 +2,7 @@
 
 module.exports = function (app) {
     app.get("/auth/success", function (req, res) {
-        if (req.user.dicordId) {
+        if (req.user.discordId) {
             return res.send("You're verified with qbot!");
         }
 
