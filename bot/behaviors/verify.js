@@ -30,9 +30,9 @@ module.exports = function (bot) {
 
                     user.discordId = discordId;
                     user.discordToken = null;
-                    return user.save();
-                }).then(function (newUser) {
-                    that.reply("Successfully verified as " + newUser.steamProfile.displayName);
+                    return user.save().then(function (newUser) {
+                        that.reply("Successfully verified as " + newUser.steamProfile.displayName);
+                    });
                 });
             }).onReject(function (err) {
                 console.error("Error during verification: " + err);
