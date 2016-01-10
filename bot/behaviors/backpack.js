@@ -32,6 +32,7 @@ module.exports = function (bot) {
             var that = this;
             var userName = _.rest(args.commandArgs.user);
 
+            console.log("backpack requested for " + userName);
             var targetUser = args.message.mentions.get(userName);
 
             if (!targetUser) {
