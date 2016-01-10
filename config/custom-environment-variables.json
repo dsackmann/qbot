@@ -4,5 +4,6 @@
   "discord": {
     "email": "DISCORD_EMAIL",
     "password": "DISCORD_PASS"
-  }
+  },
+  "sessionSecret": "SESSION_SECRET"
 }

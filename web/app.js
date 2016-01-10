@@ -18,7 +18,7 @@ app.locals.models = {
 app.use(cookieParser());
 app.use(bodyParser());
 app.use(session({
-    secret: Math.random().toString(16).slice(-8),
+    secret: config.get("sessionSecret"),
     store: new MongoStore({url: config.get("mongoURI")})
 }));
 
