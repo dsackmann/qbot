@@ -6,8 +6,22 @@ var tf2ServerService = require("../services/tf2ServerService");
 var mongoose = require("mongoose");
 var User = mongoose.model(require("../../schemas/User"));
 var _ = require("lodash");
-_.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
 
+
+function getServerInfoResponse (serverInfos) {
+    return serverInfos.map(function (server) {
+        return _.template(
+            "<% _.forEach(playerNames, function(name, i) { %>" +
+                "<%- name %>, " +
+                "<%if (i === playerNames.length - 2) {%>" +
+                    "and " +
+                "<% } %>" +
+            " <% }); %> " +
+            "<%= playerNames.length === 1 ? 'is ' : 'are ' %>" +
+            "playing <%= map %> on <%= serverName %> (<%= totalPlayers %> / <%= maxPlayers %>)"
+        )(server);
+    }).join("\n");
+}
 
 module.exports = function (bot) {
     bot
@@ -39,9 +53,7 @@ module.exports = function (bot) {
 
                 return Promise.all(serverInfoPromises);
             }).then(function (serverInfos) {
-                that.reply(serverInfos.map(function (si) {
-                    return JSON.stringify(si, null, 2);
-                }).join("\n"));
+                that.reply(getServerInfoResponse(serverInfos));
             }).onReject(function (err) {
                 console.error("Error fetching servers: " + err);
                 that.reply("Couldn't get servers, something went wrong");

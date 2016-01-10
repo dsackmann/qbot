@@ -16,6 +16,7 @@
     "connect-mongo": "^1.1.0",
     "cookie-parser": "^1.4.0",
     "discord-bot": "^0.2.15",
+    "ejs": "^2.3.4",
     "express": "^4.13.3",
     "express-session": "^1.12.1",
     "game-server-query": "^1.0.8",

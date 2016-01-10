@@ -6,12 +6,11 @@ var config = require("config");
 var mongoose = require("mongoose");
 var User = mongoose.model(require("../../schemas/User"));
 var _ = require("lodash");
-_.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
 
-var backpackInfoTmpl = _.template("{{username}} has {{numTotal}} TF2 items, including:\n\t\t" +
-    "{{numUnusual || 0}} unusual,\n\t\t" +
-    "{{numStrange || 0}} strange,\n\t\t" +
-    "and {{numCollectors || 0}} collector's items.");
+var backpackInfoTmpl = _.template("<%=username&> has <%=numTotal&> TF2 items, including:\n\t\t" +
+    "<%=numUnusual || 0&> unusual,\n\t\t" +
+    "<%=numStrange || 0&> strange,\n\t\t" +
+    "and <%=numCollectors || 0&> collector's items.");
 
 
 function parseManifest(itemManifest) {
