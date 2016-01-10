@@ -1,4 +1,4 @@
-var Base = require("./node_modules/discord-bot/src/triggers/command");
+var Base = require("../../node_modules/discord-bot/src/triggers/command");
 var util = require("util");
 
 function PrivateMessage (command, argsName) {
