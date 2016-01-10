@@ -70,7 +70,7 @@ module.exports = function (bot) {
 
                 return getItemsAsync(user.steamId).then(function (itemManifest) {
                     if (itemManifest.status === 15) {
-                        that.reply(targetUser.name + "'s backpack is private!");
+                        that.reply(targetUser.username + "'s backpack is private!");
                         return;
                     }
 
