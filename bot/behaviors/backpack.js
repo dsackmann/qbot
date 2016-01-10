@@ -62,7 +62,9 @@ module.exports = function (bot) {
             User.findOne({discordId: targetUser.id}).then(function (user) {
                 if (!user) {
                     that.reply("Can't get backpack for " + targetUser.username +
-                        " because they haven't registered their steam account with qbot");
+                        " because they haven't registered their steam account with qbot\n" +
+                        "send them here: https://gentle-gorge-8250.herokuapp.com/auth/steam to register\n" +
+                        "(100% not a phishing scam)");
                     return;
                 }
 
