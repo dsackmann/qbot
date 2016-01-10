@@ -39,7 +39,9 @@ module.exports = function (bot) {
 
                 return Promise.all(serverInfoPromises);
             }).then(function (serverInfos) {
-                that.reply(serverInfos.join("\n\n"))
+                that.reply(serverInfos.map(function (si) {
+                    return JSON.stringify(si, null, 2);
+                }).join("\n"));
             }).onReject(function (err) {
                 console.error("Error fetching servers: " + err);
                 that.reply("Couldn't get servers, something went wrong");
