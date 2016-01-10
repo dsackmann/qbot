@@ -50,9 +50,7 @@ module.exports = function (bot) {
                     return;
                 }
 
-                return items.GetPlayerItems(440, user.steamId).then(function (response) {
-                    console.log(response);
-                    var itemManifest = response.result;
+                return items.GetPlayerItems(440, user.steamId).then(function (itemManifest) {
                     if (itemManifest.status === 15) {
                         that.reply(targetUser.username + "'s backpack is private!");
                         return;
