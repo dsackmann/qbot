@@ -28,7 +28,7 @@ function getItemsAsync(steamId) {
 
 module.exports = function (bot) {
     bot
-        .on(bot.triggers['mention-command'], 'backpack', ["@user"])
+        .on(bot.triggers['command'], 'backpack', ["@user"])
         .do(function(bot, conf, args) {
             console.log("backpack requested");
             var that = this;
