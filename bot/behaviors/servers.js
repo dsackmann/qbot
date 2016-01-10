@@ -2,6 +2,7 @@
 
 var SteamApi = require("steam-api");
 var steamUsers = new SteamApi.User();
+var tf2ServerService = require("../services/tf2ServerService");
 var mongoose = require("mongoose");
 var User = mongoose.model(require("../../schemas/User"));
 var _ = require("lodash");
@@ -22,14 +23,23 @@ module.exports = function (bot) {
 
                 return steamUsers.GetPlayerSummaries(ids.join());
             }).then(function (playerSummaries) {
-                var servers = _(playerSummaries)
+                var serverInfoPromises = _(playerSummaries)
                     .filter(function (player) {
                         return player.gameserverip && player.gameserverip !== "0.0.0.0:0";
                     })
-                    .groupBy("gameserverip");
+                    .groupBy("gameserverip")
+                    .map(function (players, serverAddr) {
+                        var playerNames = _.map(players, "personaname");
 
-                var playerCounts = servers.mapValues("length").value();
-                that.reply(JSON.stringify(playerCounts));
+                        return tf2ServerService.getServerInfo(serverAddr).then(function (serverInfo) {
+                            return _.extend(serverInfo, {playerNames: playerNames});
+                        });
+                    })
+                    .value();
+
+                return Promise.all(serverInfoPromises);
+            }).then(function (serverInfos) {
+                that.reply(serverInfos.join("\n\n"))
             }).onReject(function (err) {
                 console.error("Error fetching servers: " + err);
                 that.reply("Couldn't get servers, something went wrong");
