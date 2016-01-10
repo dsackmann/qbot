@@ -61,7 +61,7 @@ module.exports = function (bot) {
 
             User.findOne({discordId: targetUser.id}).then(function (user) {
                 if (!user) {
-                    that.reply("Can't get backpack for " + user.name +
+                    that.reply("Can't get backpack for " + targetUser.username +
                         " because they haven't registered their steam account with qbot");
                     return;
                 }
