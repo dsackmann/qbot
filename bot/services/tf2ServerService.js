@@ -9,6 +9,8 @@ function Tf2ServerService () {
 
 Tf2ServerService.prototype = {
   getServerInfo: function (address) {
+      console.log("tf2 server service getting info for server: " + address);
+
       return new Promise(function (resolve, reject) {
           var address = url.parse(address);
 
