@@ -9,5 +9,6 @@ var bot = new Bot(config.get("discord"));
 require("./behaviors/quote")(bot);
 require("./behaviors/verify")(bot);
 require("./behaviors/backpack")(bot);
+require("./behaviors/servers")(bot);
 
 module.exports = bot;

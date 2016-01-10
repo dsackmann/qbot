@@ -24,7 +24,7 @@
     "passport": "^0.3.2",
     "passport-openidconnect": "0.0.1",
     "passport-steam": "^0.1.6",
-    "steam-api": "^1.1.3",
+    "steam-api": "dsackmann/steam-api-node#master",
     "unirest": "^0.4.2"
   }
 }
