@@ -2,7 +2,10 @@
 
 module.exports = function (app) {
     app.get("/addUser", function (req, res) {
-       res.render('<form method="post" name=newUser><input name="steamId"/></form>')
+       res.render('<form method="post" name=newUser>' +
+           '<input name="steamId"/>' +
+           '<input type="submit"/>' +
+           '</form>')
     });
 
     app.post("/addUser", function (req, res) {
