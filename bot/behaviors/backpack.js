@@ -12,6 +12,7 @@ function getItemsAsync(steamId) {
         "key=" + config.get("steamApiKey") + "&" +
         "SteamID=" + steamId;
 
+    console.log("requesting: "  + url);
     return new Promise(function (resolve, reject) {
         unirest.get(url)
             .header("Accept", "application/json")
