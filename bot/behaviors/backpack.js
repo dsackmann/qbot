@@ -54,7 +54,7 @@ module.exports = function (bot) {
                         return;
                     }
 
-                    that.reply(JSON.stringify(itemManifest, null, 2));
+                    that.reply("backpack contains " + itemManifest.items.length + " items.");
                 });
             }).onReject(function (err) {
                 console.error("Error fetching backpack for user: " + targetUser + ". Error: " + err);
