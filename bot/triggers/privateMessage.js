@@ -34,3 +34,5 @@ PrivateMessage.prototype.run = function (bot) {
         });
     });
 };
+
+module.exports = PrivateMessage;
