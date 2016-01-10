@@ -72,7 +72,7 @@ module.exports = function (bot) {
                         return;
                     }
 
-                    var templateModel = _.extend({username: targetUser.name},
+                    var templateModel = _.extend({username: targetUser.username},
                     parseManifest(itemManifest));
 
                     that.reply(backpackInfoTmpl(templateModel));
