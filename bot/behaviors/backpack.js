@@ -28,20 +28,17 @@ function getItemsAsync(steamId) {
 
 module.exports = function (bot) {
     bot
-        .on(bot.triggers['mention-command'], 'backpack', ['user'])
+        .on(bot.triggers['mention-command'], 'backpack')
         .do(function(bot, conf, args) {
-            console.log("backpack requested for " + args.commandArgs.user);
-
+            console.log("backpack requested");
             var that = this;
-            var userName = args.commandArgs.user.substr(1);
 
-            var targetUser = _.find(args.message.mentions, function (mention) {
-                return mention.name === userName;
+            var targetUser = _.findFirst(args.message.mentions, function (mention) {
+                return mention.name !== bot.client.user.name;
             });
 
             if (!targetUser) {
-                this.reply("who the fuck is that?");
-                return;
+               targetUser = args.message.author;
             }
 
             User.findOne({discordId: targetUser.id}).then(function (user) {
