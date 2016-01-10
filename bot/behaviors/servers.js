@@ -22,6 +22,8 @@ module.exports = function (bot) {
 
                 return steamUsers.GetPlayerSummaries(ids.join());
             }).then(function (playerSummaries) {
+                console.log(playerSummaries);
+                
                 var servers = _(playerSummaries)
                     .filter(function (player) {
                         return player.gameserverip && player.gameserverip !== "0.0.0.0:0";
