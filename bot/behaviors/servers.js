@@ -12,7 +12,7 @@ function getServerInfoResponse (serverInfos) {
     return serverInfos.map(function (server) {
         return _.template(
             "<% _.forEach(playerNames, function(name, i) { %>" +
-                "<%- name %>, " +
+                "<%- name %> " +
                 "<%if (i === playerNames.length - 2) {%>" +
                     "and " +
                 "<% } %>" +
@@ -20,7 +20,7 @@ function getServerInfoResponse (serverInfos) {
             "<%= playerNames.length === 1 ? 'is ' : 'are ' %>" +
             "playing <%= map %> on <%= serverName %> (<%= totalPlayers %> / <%= maxPlayers %>)"
         )(server);
-    }).join("\n");
+    }).join("\n\n");
 }
 
 module.exports = function (bot) {
