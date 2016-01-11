@@ -9,7 +9,7 @@ module.exports = function (app) {
         var User = app.locals.models.User;
 
         console.log(JSON.stringify(req.body));
-        User.create({steamId: req.body.newUser.steamId}).then(function () {
+        User.create({steamId: req.body.steamId}).then(function () {
             res.redirect("/addUser");
         }).onReject(function (err) {
             res.status(500).send(err);
