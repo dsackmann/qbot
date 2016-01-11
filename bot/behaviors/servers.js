@@ -53,6 +53,11 @@ module.exports = function (bot) {
 
                 return Promise.all(serverInfoPromises);
             }).then(function (serverInfos) {
+                if (serverInfos.length === 0) {
+                    that.reply("No one is playing right now. Also, fuck pancake");
+                    return;
+                }
+
                 that.reply(getServerInfoResponse(serverInfos));
             }).onReject(function (err) {
                 console.error("Error fetching servers: " + err);
