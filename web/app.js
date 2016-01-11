@@ -12,7 +12,7 @@ var mongoose = require("mongoose");
 var app = express();
 
 app.set("view engine", "ejs");
-app.set("views", path.reolve(__dirname, "views"));
+app.set("views", path.resolve(__dirname, "views"));
 app.locals.bot = require("../bot");
 app.locals.models = {
     User: mongoose.model(require("../schemas/User.js"))
