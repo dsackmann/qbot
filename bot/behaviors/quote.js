@@ -10,7 +10,7 @@ function getQuoteAsync (keyword) {
 
     return new Promise(function (resolve, reject) {
         unirest.get("https://theysaidso.p.mashape.com/quote?query=" + keyword)
-            .header("X-Mashape-Key", "qf7m0x0vZYmshpWc0QZzZ9yuktEhp1Gn6NGjsnwGzFei02XzjF")
+            .header("X-Mashape-Key", config.get("mashapeKey"))
             .header("Accept", "application/json")
             .end(function (result) {
                 resolve(formatQuote(result.body));
