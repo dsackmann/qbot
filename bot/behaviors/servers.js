@@ -14,7 +14,7 @@ function getServerInfoResponse (serverInfos) {
                 "<% } %>" +
             " <% }); %> " +
             "<%= playerNames.length === 1 ? 'is ' : 'are ' %>" +
-            "playing <%= map %> on <%= serverName %> (<%= totalPlayers %> / <%= maxPlayers %>)"
+            "playing <%= mapName %> on <%= serverName %> (<%= totalPlayers %> / <%= maxPlayers %>)"
         )(server);
     }).join("\n\n");
 }
