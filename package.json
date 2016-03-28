@@ -1,13 +1,13 @@
 {
   "name": "qbot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Chatbot for discord",
   "main": "index.js",
   "scripts": {
     "start": "node web/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Dylan Sackmann",
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.1.1",
