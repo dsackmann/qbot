@@ -6,5 +6,6 @@
     "password": "DISCORD_PASS"
   },
   "sessionSecret": "SESSION_SECRET",
-  "mashApeKey": "MASHAPE_KEY"
+  "mashApeKey": "MASHAPE_KEY",
+  "appUrl": "APP_URL"
 }
